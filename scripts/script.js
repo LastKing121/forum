@@ -17,3 +17,5 @@ function checkUsername(str) {
   xhttp.open("GET", "includes/check_username.php?q="+str, true);
   xhttp.send();
 }
+
+var test = 1;
