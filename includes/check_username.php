@@ -10,19 +10,19 @@ $q = $_GET['q'];
 // select from db, matching string
 
 try{
+	echo 'Var:	' .$q.'<br/>';
 	$stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE username = :q");
-	$stmt->bindParam(':q', $q, PDO::PARAM_STR);
+	$stmt->bindParam(':q', $q);
+	$stmt->execute();
 
-	$usernames = $stmt->execute();
+	echo 'Count: 	'.$count = $stmt->fetchColumn().'<br/>';
 
-	if ($usernames) {
-      $count = $stmt->fetchColumn();
+	if ($count == 1) {
       echo "Sorry, looks like somebody already has that username!";
     } else {
       echo "That username hasn't been taken yet!";
     }
 
-    $db = null;
 } catch(PDOException $e) {
     trigger_error('Error occured while trying to select users in DB:' . $e->getMessage(), E_USER_ERROR);
 }

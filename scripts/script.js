@@ -1,6 +1,3 @@
-$(document).ready(function(){
-
-});
 
 function checkUsername(str) {
   var xhttp;
@@ -15,7 +12,7 @@ function checkUsername(str) {
     }
   };
   xhttp.open("GET", "includes/check_username.php?q="+str, true);
+  console.log(str);
   xhttp.send();
 }
 
-var test = 1;

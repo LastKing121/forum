@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
 
                 <input type="email" name="email" value="<?php echo $email; ?>" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <div id="username-notification"></div>
-                <input type="text" name="username" value="<?php echo $username; ?>" id="inputUsername" class="form-control" placeholder="Username" onkeydown="checkUsername(this.value)" required>
+                <input type="text" name="username" value="<?php echo $username; ?>" id="inputUsername" class="form-control" placeholder="Username" onkeyup="checkUsername(this.value)" required>
                 <input type="password" name="password" value="<?php echo $password; ?>" id="inputPassword" class="form-control" placeholder="Password" required>
 
                 <div id="remember" class="checkbox">
