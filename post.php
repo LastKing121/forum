@@ -1,11 +1,14 @@
 <?php
     include_once('includes/db_config.php');
 
-    $posts = $conn->prepare("SELECT * FROM posts ORDER BY post_date LIMIT 10");
-    $posts->execute();
-    $data = $posts->fetchAll();
-?>
+    $post_id = $_GET['p'];
 
+    $stmt = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.post_author = users.user_id WHERE posts.post_id = :pid");
+    $stmt->bindParam(':pid', $post_id);
+    $stmt->execute();
+
+    $data = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +31,6 @@
 </head>
 
 <body>
-
 
     <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -62,18 +64,13 @@
         <div class="nav-clearfix"></div>
 
         <div class="container">
-
-        <?php
-            foreach ($data as $row) {
-                echo '<div class="row">';
-                echo   '<div class="col-md-12">';
-                echo        "<h2> <a href='post.php?p={$row['post_id']}'>{$row['post_title']}</a></h2>";
-                echo        "<p>{$row['post_details']}</p>";
-                echo    "</div>";
-                echo '</div>';
-            }
-        ?>
-
+			<div class="row">
+	            <div class="col-md-12">
+		            <h2><?php echo $data[0]['post_title']; ?></h2>
+					<p>Written By:<a href="user.php?u=<?php echo $data[0]['username']; ?>"> <?php echo $data[0]['username']; ?></a></p>
+		            <p><?php echo $data[0]['post_details']; ?></p>
+	            </div>
+            </div>
         </div>
 
     <!-- JS -->

@@ -1,3 +1,16 @@
+// document.addEventListener("DOMContentLoaded", function(event) {
+//   clearFixedNav();
+// });
+
+window.onload = function() {
+  clearFixedNav();
+};
+
+function clearFixedNav() {
+  var navHeight = $("nav").innerHeight();
+  $(".nav-clearfix").css({ 'height': navHeight + "px" });
+}
+
 
 function checkUsername(str) {
   var xhttp;
@@ -15,4 +28,3 @@ function checkUsername(str) {
   console.log(str);
   xhttp.send();
 }
-
