@@ -1,13 +1,14 @@
 <?php
     include_once('includes/db_config.php');
 
-    $post_id = $_GET['p'];
+    $username = $_GET['username'];
 
-    $stmt = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.post_author = users.user_id WHERE posts.post_id = :pid");
-    $stmt->bindParam(':pid', $post_id);
+    $stmt = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.post_author = users.user_id WHERE username = :username");
+    $stmt->bindParam(':username', $username);
     $stmt->execute();
 
     $data = $stmt->fetchAll();
+    $data = $data[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,9 +67,9 @@
         <div class="container">
 			<div class="row">
 	            <div class="col-md-12">
-		            <h2><?php echo $data[0]['post_title']; ?></h2>
-					<p>Written By:<a href="user.php?username=<?php echo $data[0]['username']; ?>"> <?php echo $data[0]['username']; ?></a></p>
-		            <p><?php echo $data[0]['post_details']; ?></p>
+		            <h2><?php echo $data['username']; ?></h2>
+					<p>Email: <?php echo $data['email']; ?></p>
+		            <p>Signup Date: <?php echo $data['signup_date']; ?></p>
 	            </div>
             </div>
         </div>
